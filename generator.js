@@ -29,7 +29,7 @@ async function main() {
         { name: GAMES[1].name, visits: visits2 }
       ]
     };
-    fs.writeFileSync(path.join(process.cwd(), 'visit-data.json'), JSON.stringify(result, null, 2));
+    fs.writeFileSync(path.join(process.cwd(), './public/visit-data.json'), JSON.stringify(result, null, 2));
     console.log('Visit data updated:', result);
   } catch (e) {
     console.error('Error generating data:', e);
