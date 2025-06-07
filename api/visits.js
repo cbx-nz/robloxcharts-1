@@ -1,11 +1,15 @@
-const fs = require('fs');
-const path = require('path');
+import fs from 'fs/promises';
+import path from 'path';
+import { fileURLToPath } from 'url';
 
-module.exports = (req, res) => {
+export default async function handler(req, res) {
+  const __dirname = path.dirname(fileURLToPath(import.meta.url));
   const dataPath = path.join(__dirname, '../visit-data.json');
-  if (fs.existsSync(dataPath)) {
-    res.sendFile(dataPath);
-  } else {
+  try {
+    const json = await fs.readFile(dataPath, 'utf8');
+    res.setHeader('Content-Type', 'application/json');
+    res.status(200).send(json);
+  } catch (e) {
     res.status(404).json({ error: "No data available." });
   }
-};
+}
