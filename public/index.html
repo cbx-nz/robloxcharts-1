@@ -3,59 +3,35 @@
 <head>
   <meta charset="UTF-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Roblox Game Visits Histogram</title>
+  <title>Roblox Game Visits</title>
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-  <style>
-    body { font-family: Arial, sans-serif; margin: 2em; }
-    #chart-container { width: 100%; max-width: 600px; margin: auto; }
-  </style>
 </head>
 <body>
-  <h1>Roblox Game Visits Histogram</h1>
-  <div id="chart-container">
+  <h1>Roblox Game Visits</h1>
+  <div>
     <canvas id="visitsChart"></canvas>
   </div>
+  <p id="timestamp"></p>
   <script>
-    async function fetchData() {
+    async function loadData() {
       const res = await fetch('/api/visits');
-      return await res.json();
-    }
-
-    async function renderChart() {
-      const data = await fetchData();
+      if (!res.ok) return;
+      const data = await res.json();
+      document.getElementById('timestamp').textContent = "Last update: " + new Date(data.timestamp).toLocaleString();
       const ctx = document.getElementById('visitsChart').getContext('2d');
       new Chart(ctx, {
         type: 'bar',
         data: {
-          labels: data.labels,
-          datasets: [
-            {
-              label: data.datasets[0].label,
-              data: data.datasets[0].data,
-              backgroundColor: 'rgba(54, 162, 235, 0.7)'
-            },
-            {
-              label: data.datasets[1].label,
-              data: data.datasets[1].data,
-              backgroundColor: 'rgba(255, 99, 132, 0.7)'
-            }
-          ]
-        },
-        options: {
-          scales: {
-            x: { stacked: false },
-            y: {
-              beginAtZero: true,
-              title: { display: true, text: 'Visits' }
-            }
-          }
+          labels: data.games.map(g => g.name),
+          datasets: [{
+            label: 'Visits',
+            data: data.games.map(g => g.visits),
+            backgroundColor: ['#4287f5', '#f54242']
+          }]
         }
       });
     }
-
-    renderChart();
-    // Optionally, refresh every few minutes
-    setInterval(() => location.reload(), 5 * 60 * 1000);
+    loadData();
   </script>
 </body>
 </html>
