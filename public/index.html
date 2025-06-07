@@ -37,7 +37,7 @@
   <p id="timestamp"></p>
   <script>
     async function loadData() {
-      const res = await fetch('/api/visits');
+      const res = await fetch('../api/visits.js');
       if (!res.ok) return;
       const data = await res.json();
       document.getElementById('timestamp').textContent = "Last update: " + new Date(data.timestamp).toLocaleString();
