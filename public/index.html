@@ -52,7 +52,7 @@
   </div>
   <script>
     async function loadData() {
-      const res = await fetch('/api/visits');
+      const res = await fetch('/api/visits.js');
       if (!res.ok) return;
       const data = await res.json();
       document.getElementById('timestamp').textContent =
