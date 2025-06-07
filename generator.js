@@ -1,11 +1,10 @@
-const fetch = require('node-fetch');
-const fs = require('fs');
-const path = require('path');
+import fetch from 'node-fetch';
+import fs from 'fs';
+import path from 'path';
 
-// Replace these with your Roblox universe IDs
 const GAMES = [
-  { name: "Game 1", id: "123456789" },
-  { name: "Game 2", id: "987654321" }
+  { name: "Nuclear Blast Testing Facility (radios!)", id: "27761886" },
+  { name: "Squid Game Infinity Roleplay (tug of war!)", id: "2940826531" }
 ];
 
 async function getVisitCount(gameId) {
@@ -30,7 +29,7 @@ async function main() {
         { name: GAMES[1].name, visits: visits2 }
       ]
     };
-    fs.writeFileSync(path.join(__dirname, 'visit-data.json'), JSON.stringify(result, null, 2));
+    fs.writeFileSync(path.join(process.cwd(), 'visit-data.json'), JSON.stringify(result, null, 2));
     console.log('Visit data updated:', result);
   } catch (e) {
     console.error('Error generating data:', e);
