@@ -3,8 +3,9 @@ import fs from 'fs';
 import path from 'path';
 
 const GAMES = [
-  { name: "Nuclear Blast Testing Facility (radios!)", id: "27761886" },
-  { name: "Squid Game Infinity Roleplay (tug of war!)", id: "2940826531" }
+  { name: "Nuclear Blast Testing Facility ☢️💣 (radios!)", id: "27761886" },
+  { name: "Squid Game Infinity Roleplay (⭐SKIP ROPE)", id: "2940826531" },
+  { name: "Feudal Japan Roleplay [BETA!]", id: "17429125490" }
 ];
 
 async function getVisitCount(gameId) {
