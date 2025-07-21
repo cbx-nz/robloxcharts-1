@@ -2,25 +2,14 @@ import fetch from 'node-fetch';
 import fs from 'fs';
 import path from 'path';
 
-// Replace these with actual PLACE IDs (not universe IDs)
+// ✅ Use Universe IDs here (not place IDs!)
 const GAMES = [
-  { name: "Nuclear Blast Testing Facility ☢️💣 (radios!)", id: "35158683" },
-  { name: "Squid Game Infinity Roleplay (⭐SKIP ROPE)", id: "1062512565" },
-  { name: "Feudal Japan Roleplay [BETA!]", id: "5964468758" }
+  { name: "Nuclear Blast Testing Facility ☢️💣 (radios!)", universeId: "27761886" },
+  { name: "Squid Game Infinity Roleplay (⭐SKIP ROPE)", universeId: "2940826531" },
+  { name: "Feudal Japan Roleplay [BETA!]", universeId: "5964468758" }
 ];
 
-// Step 1: Convert placeId to universeId
-async function getUniverseId(placeId) {
-  const url = `https://apis.roblox.com/universes/v1/places/${placeId}/universe`;
-  const res = await fetch(url);
-  if (!res.ok) {
-    throw new Error(`Failed to fetch universe ID for place ${placeId} - Status: ${res.status}`);
-  }
-  const data = await res.json();
-  return data.universeId;
-}
-
-// Step 2: Get visit count from universeId
+// Fetch total visit count from universeId
 async function getVisitCount(universeId) {
   const url = `https://games.roblox.com/v1/games?universeIds=${universeId}`;
   const res = await fetch(url);
@@ -31,13 +20,12 @@ async function getVisitCount(universeId) {
   return data.data[0]?.visits || 0;
 }
 
-// Main function to get all visit counts and save
+// Main function
 async function main() {
   try {
     const results = await Promise.all(
       GAMES.map(async (game) => {
-        const universeId = await getUniverseId(game.id);
-        const visits = await getVisitCount(universeId);
+        const visits = await getVisitCount(game.universeId);
         return { name: game.name, visits };
       })
     );
