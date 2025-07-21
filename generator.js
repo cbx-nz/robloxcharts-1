@@ -4,9 +4,9 @@ import path from 'path';
 
 // Replace these with actual PLACE IDs (not universe IDs)
 const GAMES = [
-  { name: "Nuclear Blast Testing Facility ☢️💣 (radios!)", id: "27761886" },
-  { name: "Squid Game Infinity Roleplay (⭐SKIP ROPE)", id: "2940826531" },
-  { name: "Feudal Japan Roleplay [BETA!]", id: "17429125490" }
+  { name: "Nuclear Blast Testing Facility ☢️💣 (radios!)", id: "35158683" },
+  { name: "Squid Game Infinity Roleplay (⭐SKIP ROPE)", id: "1062512565" },
+  { name: "Feudal Japan Roleplay [BETA!]", id: "5964468758" }
 ];
 
 // Step 1: Convert placeId to universeId
